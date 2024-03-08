@@ -21,7 +21,7 @@ exports.getAllMahasiswa = function (req, res) {
   );
 };
 
-// GET Single Mahasiswa
+// GET Single Mahasiswa By ID
 exports.getSingleMahasiswa = function (req, res) {
   let id = req.params.id;
   connection.query(
@@ -32,6 +32,26 @@ exports.getSingleMahasiswa = function (req, res) {
         console.log(error);
       } else {
         response.ok(rows, res);
+      }
+    }
+  );
+};
+
+// POST Mahasiswa Data
+
+exports.addMahasiswaData = function (req, res) {
+  var nim = req.body.nim;
+  var nama = req.body.nama;
+  var jurusan = req.body.jurusan;
+
+  connection.query(
+    "INSERT INTO tbl_mahasiswa (nim, nama, jurusan) VALUES(?,?,?)",
+    [nim, nama, jurusan],
+    function (error, rows, field) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.ok("Berhasil Menambahkan Data!", res);
       }
     }
   );

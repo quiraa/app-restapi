@@ -9,4 +9,6 @@ module.exports = function (app) {
   app.route("/mahasiswas").get(jsonKu.getAllMahasiswa);
 
   app.route("/mahasiswas/:id").get(jsonKu.getSingleMahasiswa);
+
+  app.route("/add").post(jsonKu.addMahasiswaData);
 };
