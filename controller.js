@@ -94,3 +94,17 @@ exports.removeSingleMahasiswa = function (req, res) {
     }
   );
 };
+
+// Show Matakuliah Group
+exports.showMatkulGroup = function (req, res) {
+  connection.query(
+    "SELECT tbl_mahasiswa.id_mahasiswa, tbl_mahasiswa.nim, tbl_mahasiswa.nama, tbl_mahasiswa.jurusan, tbl_matakuliah.matakuliah, tbl_matakuliah.sks FROM tbl_krs JOIN tbl_mahasiswa JOIN tbl_matakuliah WHERE tbl_krs.id_matakuliah = tbl_matakuliah.id_matakuliah AND tbl_krs.id_mahasiswa = tbl_mahasiswa.id_mahasiswa ORDER BY tbl_mahasiswa.id_mahasiswa;",
+    function (error, rows, field) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.nestedOk(rows, res);
+      }
+    }
+  );
+};

@@ -12,5 +12,7 @@ module.exports = function (app) {
 
   app.route("/change").put(request.updateMahasiswaData);
 
-  app.delete("/remove").delete(request.removeSingleMahasiswa);
+  app.route("/remove").delete(request.removeSingleMahasiswa);
+
+  app.route("/showMatakuliah").get(request.showMatkulGroup);
 };
