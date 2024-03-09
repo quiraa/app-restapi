@@ -1,14 +1,16 @@
 "use strict";
 
-const json = require("body-parser/lib/types/json");
-
 module.exports = function (app) {
-  var jsonKu = require("./controller");
-  app.route("/").get(jsonKu.index);
+  var request = require("./controller");
+  app.route("/").get(request.index);
 
-  app.route("/mahasiswas").get(jsonKu.getAllMahasiswa);
+  app.route("/mahasiswas").get(request.getAllMahasiswa);
 
-  app.route("/mahasiswas/:id").get(jsonKu.getSingleMahasiswa);
+  app.route("/mahasiswas/:id").get(request.getSingleMahasiswa);
 
-  app.route("/add").post(jsonKu.addMahasiswaData);
+  app.route("/add").post(request.addMahasiswaData);
+
+  app.route("/change").put(request.updateMahasiswaData);
+
+  app.delete("/remove").delete(request.removeSingleMahasiswa);
 };

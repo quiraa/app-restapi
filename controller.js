@@ -25,7 +25,7 @@ exports.getAllMahasiswa = function (req, res) {
 exports.getSingleMahasiswa = function (req, res) {
   let id = req.params.id;
   connection.query(
-    "SELECT * FROM tbl_mahasiswa WHERE id_mahasiswa = ?",
+    "SELECT * FROM tbl_mahasiswa WHERE id_mahasiswa=?",
     [id],
     function (error, rows, fields) {
       if (error) {
@@ -52,6 +52,44 @@ exports.addMahasiswaData = function (req, res) {
         console.log(error);
       } else {
         response.ok("Berhasil Menambahkan Data!", res);
+      }
+    }
+  );
+};
+
+// PUT Change Mahasiswa Data
+
+exports.updateMahasiswaData = function (req, res) {
+  var id = req.body.id_mahasiswa;
+  var nim = req.body.nim;
+  var nama = req.body.nama;
+  var jurusan = req.body.jurusan;
+
+  connection.query(
+    "UPDATE tbl_mahasiswa SET nim=?, nama=?, jurusan=? WHERE id_mahasiswa=? ",
+    [nim, nama, jurusan, id],
+    function (error, rows, field) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.ok("Berhasil Update Mahasiswa", res);
+      }
+    }
+  );
+};
+
+// DELETE Remove Mahasiswa By ID;
+
+exports.removeSingleMahasiswa = function (req, res) {
+  var id = req.body.id_mahasiswa;
+  connection.query(
+    "DELETE FROM tbl_mahasiswa WHERE id_mahasiswa=?",
+    [id],
+    function (error, rows, field) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.ok(rows, res);
       }
     }
   );
